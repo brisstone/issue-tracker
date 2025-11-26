@@ -11,4 +11,6 @@ model Issue {
   status      IssueStatus @default(OPEN)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+
+  @@index([status])
 }
