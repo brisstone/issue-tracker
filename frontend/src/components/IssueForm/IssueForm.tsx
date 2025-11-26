@@ -8,6 +8,7 @@ import {
 import { TextArea } from "../view/Text/TextArea";
 import { Select } from "../view/Select/Select";
 import { Button } from "../view/Button/Button";
+import { toast } from "sonner";
 
 export default function IssueForm({
   initial = {},
@@ -30,7 +31,7 @@ export default function IssueForm({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!form.title.trim() || !form.description.trim()) return;
+    if (!form.title.trim() || !form.description.trim()) toast("Form fields are required!");
 
     onSubmit({
       title: form.title.trim(),
@@ -46,6 +47,7 @@ export default function IssueForm({
           value={form.title}
           placeholder="Title"
           onChange={(e) => updateField("title", e.target.value)}
+          required
         />
         <TextArea
           label="Description"
@@ -53,6 +55,7 @@ export default function IssueForm({
           value={form.description}
           placeholder="Add description"
           onChange={(e) => updateField("description", e.target.value)}
+          required
         />
 
         {mode === "edit" && (

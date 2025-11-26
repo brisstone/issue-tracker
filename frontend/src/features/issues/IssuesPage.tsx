@@ -3,10 +3,15 @@ import { Button } from "../../components/view/Button/Button";
 import IssueForm from "../../components/IssueForm/IssueForm";
 import { Modal } from "../../components/view/Modal/Modal";
 import { useCreateIssue, useIssues } from "../../lib/issues";
-import type { IssueStatus } from "../../types/issues";
+import type { Issue, IssueStatus } from "../../types/issues";
+import IssueList from "./IssueList";
 
 export default function IssuesPage() {
   const [createOpen, setCreateOpen] = useState(false);
+  const [editingIssue, setEditingIssue] = useState<Issue | null>(null);
+  const [issueToDelete, setIssueToDelete] = useState<Issue | null>(
+    null
+  );
   const { data: issues, isLoading, isError } = useIssues();
 
   const createMutation = useCreateIssue();
@@ -19,6 +24,8 @@ export default function IssuesPage() {
     await createMutation.mutateAsync(data);
     setCreateOpen(false);
   };
+
+  
 
   return (
     <div className="grid gap-6 md:grid-cols-[1.5fr,1fr]">
@@ -35,6 +42,14 @@ export default function IssuesPage() {
             + Create issue
           </Button>
         </div>
+
+        {!isLoading && !isError && issues && (
+          <IssueList
+            issues={issues}
+            onEdit={setEditingIssue}
+            onDelete={setIssueToDelete}
+          />
+        )}
       </section>
 
       <Modal

@@ -23,3 +23,15 @@ export interface IssueFormProps {
     }) => void;
   }
   
+
+  export interface IssueListItemProps {
+    issue: Issue;
+    onEdit: (issue: Issue) => void;
+    onDelete: (issue: Issue) => void;
+  }
+
+  export interface IssueListProps {
+    issues: Issue[];
+    onEdit: (issue: Issue) => void;
+    onDelete: (issue: Issue) => void;
+  }

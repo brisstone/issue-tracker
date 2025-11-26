@@ -17,13 +17,13 @@ const variants: Record<Variant, string> = {
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   children: ReactNode;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export function Button({
   variant = "primary",
   children,
-  disabled,
+  disabled = false,
   ...rest
 }: ButtonProps) {
   return (
