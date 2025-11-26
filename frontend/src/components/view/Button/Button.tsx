@@ -17,11 +17,24 @@ const variants: Record<Variant, string> = {
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   children: ReactNode;
+  disabled: boolean;
 }
 
-export function Button({ variant = "primary", children, ...rest }: ButtonProps) {
+export function Button({
+  variant = "primary",
+  children,
+  disabled,
+  ...rest
+}: ButtonProps) {
   return (
-    <button className={`${base} ${variants[variant]}`} {...rest}>
+    <button
+      disabled={disabled}
+      className={`${base} ${variants[variant]}         ${
+        disabled ? "pointer-events-none opacity-50" : ""
+      }
+`}
+      {...rest}
+    >
       {children}
     </button>
   );
