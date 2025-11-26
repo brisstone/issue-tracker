@@ -10,8 +10,8 @@ export default function IssueList({
     <>Create an issue to get started.</>;
   }
   return (
-    <div className="space-y-3">
-      {issues.map((issue) => (
+    <div className="space-y-3 pt-14">
+      {issues?.map((issue) => (
         <IssueListItem
           key={issue.id}
           issue={issue}

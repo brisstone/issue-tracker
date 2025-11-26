@@ -31,7 +31,8 @@ export default function IssueForm({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!form.title.trim() || !form.description.trim()) toast("Form fields are required!");
+    if (!form.title.trim() || !form.description.trim())
+      toast("Form fields are required!");
 
     onSubmit({
       title: form.title.trim(),
@@ -58,21 +59,17 @@ export default function IssueForm({
           required
         />
 
-        {mode === "edit" && (
-          <Select
-            label="Status"
-            value={form.status}
-            onChange={(e) =>
-              updateField("status", e.target.value as IssueStatus)
-            }
-          >
-            {STATUS_OPTIONS.map((s) => (
-              <option key={s} value={s}>
-                {s.replace("_", " ")}
-              </option>
-            ))}
-          </Select>
-        )}
+        <Select
+          label="Status"
+          value={form.status}
+          onChange={(e) => updateField("status", e.target.value as IssueStatus)}
+        >
+          {STATUS_OPTIONS.map((s) => (
+            <option key={s} value={s}>
+              {s.replace("_", " ")}
+            </option>
+          ))}
+        </Select>
 
         <Button type="submit" disabled={submitting}>
           {submitting

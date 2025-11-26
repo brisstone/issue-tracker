@@ -54,26 +54,24 @@ export function Modal({
       >
         <div className="flex items-start justify-between gap-4 border-b border-slate-200 px-4 py-3">
           {title && (
-            <h2 className="text-sm font-semibold text-slate-900">
-              {title}
-            </h2>
+            <h2 className="text-sm font-semibold text-slate-900">{title}</h2>
           )}
           {!hideCloseButton && (
-            <Button
-              type="button"
-              variant="ghost"
-              className="px-2 py-1 text-xs"
-              onClick={onClose}
-              disabled={false}
-            >
-              ✕
-            </Button>
+            <div>
+              <Button
+                type="button"
+                variant="secondary"
+                className="px-2 py-1 text-xs text-[#000000]"
+                onClick={onClose}
+                disabled={false}
+              >
+                ✕
+              </Button>
+            </div>
           )}
         </div>
 
-        <div className="px-4 py-3 text-sm text-slate-800">
-          {children}
-        </div>
+        <div className="px-4 py-3 text-sm text-slate-800">{children}</div>
 
         {footer && (
           <div className="flex items-center justify-end gap-2 border-t border-slate-200 px-4 py-3">

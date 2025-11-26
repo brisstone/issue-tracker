@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { Issue, IssueStatus } from "../types/issues";
+import type { Issue, IssueStatus, PaginatedIssues } from "../types/issues";
 import api from "./api";
 
 
@@ -12,18 +12,24 @@ export interface CreateIssuePayload {
 }
 
 export interface UpdateIssuePayload {
-    id: string;
+    id: number;
     title?: string;
     description?: string;
     status?: IssueStatus;
 }
 
 
-export function useIssues() {
-    return useQuery<Issue[]>({
-        queryKey: ISSUES_KEY,
+export function useIssues(searchTerm: string, status: string,  page: number,
+    pageSize: number) {
+    return useQuery<PaginatedIssues>({
+        queryKey: ["issues", { searchTerm, status,  page, pageSize }],
         queryFn: async () => {
-            const res = await api.get<Issue[]>("/issues");
+            const params = new URLSearchParams();
+            if (searchTerm) params.set("searchTerm", searchTerm);
+            if (status) params.set("status", status);
+            params.set("page", String(page));
+            params.set("pageSize", String(pageSize));
+            const res = await api.get<PaginatedIssues>(`/issues?${params.toString()}`);
             return res.data;
         }
     })
