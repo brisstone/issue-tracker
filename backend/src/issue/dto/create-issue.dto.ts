@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { $Enums } from "@prisma/client";
+import { IssueStatus } from "@prisma/client";
 import { IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateIssueDto {
@@ -16,10 +16,10 @@ export class CreateIssueDto {
 
 
     @ApiPropertyOptional({
-      enum: $Enums.IssueStatus,
+      enum: IssueStatus,
       description: "status of the issue (defaults to OPEN)"
     })
     @IsOptional()
-    @IsEnum($Enums.IssueStatus)
-    status?: $Enums.IssueStatus
+    @IsEnum(IssueStatus)
+    status?: IssueStatus
 }
